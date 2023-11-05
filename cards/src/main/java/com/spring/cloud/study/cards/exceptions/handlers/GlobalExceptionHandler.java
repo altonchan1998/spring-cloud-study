@@ -1,8 +1,8 @@
-package com.spring.cloud.study.accounts.exceptions.handlers;
+package com.spring.cloud.study.cards.exceptions.handlers;
 
-import com.spring.cloud.study.accounts.exceptions.ResourceExistsException;
-import com.spring.cloud.study.accounts.exceptions.ResourceNotFoundException;
-import com.spring.cloud.study.accounts.models.dtos.ErrorResponseDto;
+import com.spring.cloud.study.cards.exceptions.ResourceExistsException;
+import com.spring.cloud.study.cards.exceptions.ResourceNotFoundException;
+import com.spring.cloud.study.cards.models.dtos.ErrorResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -56,5 +56,4 @@ public class GlobalExceptionHandler {
                 LocalDateTime.now()
         );
     }
-
 }

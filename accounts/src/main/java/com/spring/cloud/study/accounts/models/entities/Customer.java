@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
+@Table(name = "Customer")
 @Getter @Setter @ToString @AllArgsConstructor @NoArgsConstructor
 public class Customer extends Auditable {
 
