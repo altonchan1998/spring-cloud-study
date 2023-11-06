@@ -1,6 +1,7 @@
 package com.spring.cloud.study.loans.controllers;
 
 import com.spring.cloud.study.loans.constants.ValidationMessages;
+import com.spring.cloud.study.loans.models.dtos.LoansContactInfoDto;
 import com.spring.cloud.study.loans.models.dtos.LoansDto;
 import com.spring.cloud.study.loans.services.ILoansService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,6 +30,9 @@ public class LoansController {
 
     @Autowired
     ILoansService iLoansService;
+
+    @Autowired
+    LoansContactInfoDto loansContactInfoDto;
 
     @Operation(
             summary = "Create Loan REST API",
@@ -86,5 +90,16 @@ public class LoansController {
             String mobileNumber
     ) {
         iLoansService.deleteLoan(mobileNumber);
+    }
+
+    @Operation(
+            summary = "Get Contact Info",
+            description = "Contact Info details that can be reached out in case of any issues"
+    )
+    @ApiResponses
+    @GetMapping("/contact-info")
+    public LoansContactInfoDto getContactInfo() {
+        log.debug("Invoked Loans contact-info API");
+        return loansContactInfoDto;
     }
 }

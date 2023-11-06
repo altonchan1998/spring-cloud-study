@@ -3,7 +3,12 @@ server:
   port: 8080
 spring:
   application:
-    name: "accounts"
+    name: "accounts" # Required for seeking config.yaml from config server -> {application-name}-{profiles-active}.yaml
+  profiles:
+    active: "prod" # Required for seeking config.yaml from config server -> {application-name}-{profiles-active}.yaml
+  config:
+    import: configserver:http://localhost:8071  # optional: <-- prefix to allow application runs without config server started.
+  #    import: configserver:${CONFIG_SERVER_ENDPOINT}
   datasource:
     url: jdbc:h2:mem:testdb
     driverClassName: org.h2.Driver
@@ -13,7 +18,13 @@ spring:
     console:
       enabled: true
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect # console url : {host}/h2-console
+    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
     show-sql: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" # actuator api to be exposed

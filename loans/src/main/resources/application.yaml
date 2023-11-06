@@ -5,6 +5,9 @@ spring:
     name: "loans"
   profiles:
     active: "prod"
+  config:
+    import: configserver:http://localhost:8071
+  #    import: configserver:${CONFIG_SERVER_ENDPOINT}
   datasource:
     url: jdbc:h2:mem:testdb
     driverClassName: org.h2.Driver

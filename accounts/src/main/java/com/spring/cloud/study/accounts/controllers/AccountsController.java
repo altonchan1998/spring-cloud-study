@@ -1,6 +1,7 @@
 package com.spring.cloud.study.accounts.controllers;
 
 import com.spring.cloud.study.accounts.constants.ValidationMessages;
+import com.spring.cloud.study.accounts.models.dtos.AccountsContactInfoDto;
 import com.spring.cloud.study.accounts.models.dtos.CustomerDto;
 import com.spring.cloud.study.accounts.services.IAccountsService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -8,6 +9,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,11 +24,15 @@ import org.springframework.web.bind.annotation.*;
 )
 @RestController
 @RequestMapping(path = "/api")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Validated
 @Slf4j
 public class AccountsController {
     @Autowired
-    private IAccountsService iAccountsService;
+    IAccountsService iAccountsService;
+
+    @Autowired
+    AccountsContactInfoDto accountsContactInfoDto;
 
     @Operation(
             summary = "Create Account REST API",
@@ -72,5 +79,15 @@ public class AccountsController {
             String mobileNumber
     ) {
         iAccountsService.deleteAccount(mobileNumber);
+    }
+
+    @Operation(
+            summary = "Get Contact Info",
+            description = "Contact Info details that can be reached out in case of any issues"
+    )
+    @ApiResponses
+    @GetMapping("/contact-info")
+    public AccountsContactInfoDto getContactInfo() {
+        return accountsContactInfoDto;
     }
 }

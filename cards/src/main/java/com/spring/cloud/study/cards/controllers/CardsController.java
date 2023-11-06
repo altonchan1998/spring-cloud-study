@@ -1,6 +1,7 @@
 package com.spring.cloud.study.cards.controllers;
 
 import com.spring.cloud.study.cards.constants.ValidationMessages;
+import com.spring.cloud.study.cards.models.dtos.CardsContactInfoDto;
 import com.spring.cloud.study.cards.models.dtos.CardsDto;
 import com.spring.cloud.study.cards.services.ICardsService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,6 +32,9 @@ public class CardsController {
 
     @Autowired
     ICardsService iCardsService;
+
+    @Autowired
+    CardsContactInfoDto cardsContactInfoDto;
 
     @Operation(
             summary = "Create Card REST API",
@@ -87,5 +91,15 @@ public class CardsController {
             String mobileNumber
     ) {
         iCardsService.deleteCard(mobileNumber);
+    }
+
+    @Operation(
+            summary = "Get Contact Info",
+            description = "Contact Info details that can be reached out in case of any issues"
+    )
+    @ApiResponses
+    @GetMapping("/contact-info")
+    public CardsContactInfoDto getContactInfo() {
+        return cardsContactInfoDto;
     }
 }
