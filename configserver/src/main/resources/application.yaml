@@ -19,17 +19,22 @@ spring:
         native:
           searchLocations: classpath:/config # location of config files in repository
 #          searchLocations: file:///C:/config # location of config files in local system
+#  rabbitmq: # default config of rabbitmq for spring cloud bus
+#    host: "localhost"
+#    port: 5672
+#    username: "guest"
+#    password: "guest"
 
 management: # For actuator
   endpoints:
     web:
       exposure:
         include: "*"
-  health:
+  health: # enable health related information about readiness state and liveness state: {baseUrl}/actuator/health
     readiness-state:
-      enabled: true
+      enabled: true # {baseUrl}/actuator/health/readiness
     liveness-state:
-      enabled: true
+      enabled: true # {baseUrl}/actuator/health/liveness
   endpoint:
     health:
       probes:
